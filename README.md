@@ -2,7 +2,7 @@
 
 AOC_Utility is a Rust utility library made for advent of code. This utility is not made of solutions but rather tools to remove tasks that are repeated on a consistent basis. 
 
-# Available Functions
+## Available Functions
 ```
 pub fn split_words(s: &String) -> Vec<&str>
 
