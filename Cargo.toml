@@ -3,7 +3,7 @@ name = "aoc_utility"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
-keywords = ["advent of code", "aoc", "string"]
+keywords = ["advent", "aoc", "string", "parse"]
 description = "This is Advent of Code Utility for parsing daily input"
 
 [dependencies]
