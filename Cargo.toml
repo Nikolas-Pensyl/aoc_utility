@@ -1,0 +1,8 @@
+[package]
+name = "aoc_utility"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+keywords = ["advent of code", "aoc", "string"]
+
+[dependencies]
