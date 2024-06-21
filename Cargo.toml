@@ -7,3 +7,4 @@ keywords = ["advent", "aoc", "string", "parse"]
 description = "This is Advent of Code Utility for parsing daily input"
 
 [dependencies]
+ureq = "2.9.7"

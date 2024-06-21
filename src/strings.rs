@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 pub fn split_words(s: &String) -> Vec<&str> {
     let mut words: Vec<&str> = Vec::new();
     let bytes: &[u8] = s.trim().as_bytes();
@@ -12,7 +14,7 @@ pub fn split_words(s: &String) -> Vec<&str> {
         }
     }
     words.push(&s[start..]);
-    return words;
+    words
 }
 
 pub fn split_lines(s: &String) -> Vec<&str> {
@@ -29,7 +31,7 @@ pub fn split_lines(s: &String) -> Vec<&str> {
         }
     }
     words.push(&s[start..]);
-    return words;
+    words
 }
 
 pub fn split_char(s: &String, split_c: char) -> Vec<&str> {
@@ -47,7 +49,7 @@ pub fn split_char(s: &String, split_c: char) -> Vec<&str> {
         }
     }
     words.push(&s[start..]);
-    return words;
+    words
 }
 
 pub fn vec_str_to_ints(str_vec: &Vec<&str>) -> Vec<usize> {
@@ -58,5 +60,15 @@ pub fn vec_str_to_ints(str_vec: &Vec<&str>) -> Vec<usize> {
         .expect("One of the items is not a number"));
     }
 
-    return ints;
+    ints
+}
+
+pub fn count_chars(s: &String) -> HashMap<char, usize> {
+    let mut str_hash_map: HashMap<char, usize> = HashMap::new();
+
+    for ch in s.chars() {
+        str_hash_map.entry(ch).and_modify(|counter| *counter += 1).or_insert(1);
+    }
+
+    str_hash_map
 }
