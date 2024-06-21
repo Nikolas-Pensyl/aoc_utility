@@ -1,12 +1,13 @@
-use std::fs::read_to_string;
-use ureq::{get};
+use ureq;
 use std::env;
 use std::fs;
 
 pub fn get_input(year: usize, day: usize) -> String {
     let session: String = get_session();
 
-    let response = ureq::get("https://adventofcode.com/{year}/{day}/2/input")
+    let uri = format!("https://adventofcode.com/{year}/day/{day}/input");
+
+    let response = ureq::get(&uri)
     .set("cookie", &session)
     .call()
     .expect("Problem contacting the server. Double check your session value and the day and year are valid. \n\n: {error:?}")
