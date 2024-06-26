@@ -18,6 +18,17 @@ pub fn get_input(year: usize, day: usize) -> String {
 }
 
 
+pub fn submit_ans(year: usize, day: usize, part: &str, answer: &str) -> String {
+    let url = format!("https://adventofcode.com/{year}/day/{day}/answer");
+    let params = &[("level", part), ("answer", answer)];
+    let response = ureq::post(&url).set("cookie", &get_session()).send_form(params)
+    .expect("Failed to submit answer.")
+    .into_string()
+    .expect("Failed to turn response into string.");
+
+    response
+}
+
 fn get_session() -> String {
     let mut path: std::path::PathBuf = env::current_dir().expect("Problem occured getting the current directory.");
     path = path.join(".session");

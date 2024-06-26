@@ -1,55 +1,28 @@
 use std::collections::HashMap;
 
 pub fn split_words(s: &String) -> Vec<&str> {
-    let mut words: Vec<&str> = Vec::new();
-    let bytes: &[u8] = s.trim().as_bytes();
-    let mut start: usize = 0;
-
-    for (i, c) in bytes.iter().enumerate() {
-        if *c==b' ' && start!=i {
-            words.push(&s[start..i]);
-            start = i+1;
-        } else if *c==b' ' {
-            start = i+1
-        }
-    }
-    words.push(&s[start..]);
+    let words: Vec<&str> = s.trim().split(' ').collect();
     words
 }
 
 pub fn split_lines(s: &String) -> Vec<&str> {
-    let mut words: Vec<&str> = Vec::new();
-    let bytes: &[u8] = s.trim().as_bytes();
-    let mut start: usize = 0;
-
-    for (i, c) in bytes.iter().enumerate() {
-        if *c==b'\n' && start!=i {
-            words.push(&s[start..i]);
-            start = i+1;
-        } else if *c==b'\n' {
-            start = i+1
-        }
-    }
-    words.push(&s[start..]);
-    words
+    let lines: Vec<&str> = s.trim().split('\n').collect();
+    lines
 }
 
-pub fn split_char(s: &String, split_c: char) -> Vec<&str> {
-    let mut words: Vec<&str> = Vec::new();
-    let bytes: &[u8] = s.trim().as_bytes();
-    let mut start: usize = 0;
-    let c8: u8 = split_c as u8;
+pub fn grid_2d_char(s: &String) -> Vec<Vec<char>> {
+    let lines: Vec<&str>  = s.trim().split('\n').collect();
+    let grid: Vec<Vec<char>> = lines.into_iter().map(|line| line.chars().collect()).collect();
 
-    for (i, c) in bytes.iter().enumerate() {
-        if *c==c8 && start!=i {
-            words.push(&s[start..i]);
-            start = i+1;
-        } else if *c==c8 {
-            start = i+1
-        }
-    }
-    words.push(&s[start..]);
-    words
+    grid
+}
+
+pub fn grid_2d_ints(s: &String) -> Vec<Vec<u32>> {
+    let lines: Vec<&str>  = s.trim().split('\n').collect();
+
+    let grid: Vec<Vec<u32>> = lines.into_iter().map(|line| line.trim().chars().map(|ch| ch.to_digit(10).unwrap()).collect()).collect();
+
+    grid
 }
 
 pub fn vec_str_to_ints(str_vec: &Vec<&str>) -> Vec<usize> {
@@ -71,4 +44,17 @@ pub fn count_chars(s: &String) -> HashMap<char, usize> {
     }
 
     str_hash_map
+}
+
+pub fn multi_count_chars(vec_ptr_s: &Vec<&str>) -> Vec<HashMap<char, usize>> {
+    let mut vec_hash: Vec<HashMap<char, usize>> = Vec::new();
+    for line in vec_ptr_s {
+        let mut str_hash_map: HashMap<char, usize> = HashMap::new();
+        for ch in line.chars() {
+            str_hash_map.entry(ch).and_modify(|counter| *counter += 1).or_insert(1);
+        }
+        vec_hash.push(str_hash_map);
+    }
+
+    vec_hash
 }
